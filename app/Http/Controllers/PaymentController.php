@@ -95,7 +95,39 @@ class PaymentController extends Controller
         ]);
     }
 
+        // payment update
+        public function PaymentUpdate($id, Request $request){
+
+            // validation checking
+            $this->Validation($request);
     
+            // date or time
+            $time = date("g:i a");   
+            $date= date("Y-m-d");  
+    
+            // get edit data
+            $update_payment = Payment::find($id);
+            $update_payment -> name         = $request->name;
+            $update_payment -> amount       = $request->amount;
+            $update_payment -> payment_recevier = $request->payment_recevier;
+            $update_payment -> payment_type = $request->payment_type;
+            $update_payment -> description  = $request->description;
+            $update_payment -> date         = $date;
+            $update_payment -> time         = $time;
+            if($update_payment->status== 'CashIn'){
+                $update_payment -> status   = 'CashIn';
+            }else {
+                $update_payment -> status   = 'CashOut';
+            }
+            $update_payment -> update();
+    
+            // return response
+            return response()->json([
+                'status'        => 200,
+                'message'       => 'Payment updated successfully',
+            ]);
+        }
+
 
 
     // validation checking function
