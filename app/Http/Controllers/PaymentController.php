@@ -166,6 +166,24 @@ class PaymentController extends Controller
 
     }
 
+    // payment item search
+    public function PaymentSearch($search){
+
+        // payment item searching
+        $search = Payment::where('name', 'LIKE', '%'.$search.'%')
+        ->orWhere('description', 'LIKE', '%'.$search.'%')
+        ->orWhere('payment_type', 'LIKE', '%'.$search.'%')
+        ->orWhere('payment_recevier', 'LIKE', '%'.$search.'%')
+        ->get();
+
+        // return response
+        return response()->json([
+            'status'        => 200,
+            'message'       => 'Payment search result',
+            'data'          => $search
+        ]);
+
+    }
 
     // validation checking function
     public function Validation($request){

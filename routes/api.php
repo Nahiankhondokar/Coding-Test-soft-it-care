@@ -30,3 +30,5 @@ Route::post('/payment-update/{id}', [PaymentController::class, 'PaymentUpdate'])
 Route::get('/payment-delete/{id}', [PaymentController::class, 'PaymentDelete']);
 
 Route::get('/payment-calculation', [PaymentController::class, 'PaymentCalculation']);
+
+Route::get('/payment-search/{search}', [PaymentController::class, 'PaymentSearch']);
