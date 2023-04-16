@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('amount');
+            $table->double('amount');
             $table->string('payment_recevier');
             $table->string('payment_type');
             $table->string('description') -> nullable();
