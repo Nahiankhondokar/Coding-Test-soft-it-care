@@ -82,6 +82,20 @@ class PaymentController extends Controller
     }
 
 
+    // payment edit
+    public function PaymentEdit($id){
+        // get edit data
+        $edit_payment = Payment::find($id);
+
+        // return response
+        return response()->json([
+            'status'        => 200,
+            'message'       => 'Payment edit information',
+            'data'          => $edit_payment
+        ]);
+    }
+
+    
 
 
     // validation checking function
