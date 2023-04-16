@@ -127,7 +127,20 @@ class PaymentController extends Controller
                 'message'       => 'Payment updated successfully',
             ]);
         }
-
+    
+        // payment delete
+        public function PaymentDelete($id){
+            // payment delete
+            Payment::find($id)->delete();
+    
+            // return response
+            return response()->json([
+                'status'        => 200,
+                'message'       => 'Payment deleted successfully',
+            ]);
+        }
+    
+    
 
 
     // validation checking function
