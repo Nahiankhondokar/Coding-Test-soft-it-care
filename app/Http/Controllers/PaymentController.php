@@ -3,23 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payment;
-use DateTime;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Date;
 
 class PaymentController extends Controller
 {
     // cashIn payment add 
     public function cashInPayment(Request $request){
 
-        // validation
-        $request->validate([
-            'name'              => 'required',
-            'amount'            => 'required',
-            'payment_recevier'  => 'required',
-            'payment_type'      => 'required',
-            'description'       => 'required'
-        ]);
+        // validation checking
+        $this->Validation($request);
 
         // date or time
         $time = date("g:i a");   
@@ -48,19 +40,12 @@ class PaymentController extends Controller
     // cashOut payment add 
     public function cashOutPayment(Request $request){
 
-        // validation
-        $request->validate([
-            'name'              => 'required',
-            'amount'            => 'required',
-            'payment_recevier'  => 'required',
-            'payment_type'      => 'required',
-            'description'       => 'required'
-        ]);
+        // validation checking
+        $this->Validation($request);
 
         // date or time
         $time = date("g:i a");   
         $date= date("Y-m-d");   
-
 
         // data store to DB
         Payment::create([
@@ -95,4 +80,21 @@ class PaymentController extends Controller
             'data'          => $payment_list
         ]);
     }
+
+
+
+
+    // validation checking function
+    public function Validation($request){
+        $request->validate([
+            'name'              => 'required',
+            'amount'            => 'required',
+            'payment_recevier'  => 'required',
+            'payment_type'      => 'required',
+            'description'       => 'required'
+        ]);
+
+    }
+
+
 }

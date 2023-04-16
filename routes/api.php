@@ -23,3 +23,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/cash-in', [PaymentController::class, 'cashInPayment']);
 Route::post('/cash-out', [PaymentController::class, 'cashOutPayment']);
 Route::get('/payment-list', [PaymentController::class, 'PaymentListShow']);
+
+Route::get('/payment-edit/{id}', [PaymentController::class, 'PaymentEdit']);
+Route::post('/payment-update/{id}', [PaymentController::class, 'PaymentUpdate']);
+
+Route::get('/payment-delete/{id}', [PaymentController::class, 'PaymentDelete']);
+
+Route::get('/payment-calculation', [PaymentController::class, 'PaymentCalculation']);
