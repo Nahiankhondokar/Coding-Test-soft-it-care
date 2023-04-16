@@ -32,3 +32,5 @@ Route::get('/payment-delete/{id}', [PaymentController::class, 'PaymentDelete']);
 Route::get('/payment-calculation', [PaymentController::class, 'PaymentCalculation']);
 
 Route::get('/payment-search/{search}', [PaymentController::class, 'PaymentSearch']);
+
+Route::get('/payment-search-datewise/{date}', [PaymentController::class, 'PaymentSearchDateWise']);

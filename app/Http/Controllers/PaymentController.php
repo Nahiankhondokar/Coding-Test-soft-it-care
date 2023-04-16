@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payment;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
@@ -181,6 +182,38 @@ class PaymentController extends Controller
             'status'        => 200,
             'message'       => 'Payment search result',
             'data'          => $search
+        ]);
+
+    }
+
+    
+    // payment item search
+    public function PaymentSearchDateWise($date){
+
+        // date wise payment searching
+        if($date == 'today'){
+            $today = date('Y-m-d',strtotime("today"));
+            $date_wise_search= Payment::whereBetween('created_at', [$today.' 00:00:00', $today.' 23:59:59'])->get();
+
+        }else if($date == 'yesterday'){
+            $yesterday = date('Y-m-d',strtotime("yesterday"));
+            $date_wise_search= Payment::whereBetween('created_at', [$yesterday.' 00:00:00', $yesterday.' 23:59:59'])->get();
+
+        }else if($date == 'week'){
+            // $dt = Carbon::now();
+            $date_wise_search= Payment::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();
+
+        }else if($date == 'month'){
+            $date_wise_search= Payment::whereMonth('created_at', date('m'))->get();
+
+        }
+       
+
+        // return response
+        return response()->json([
+            'status'        => 200,
+            'message'       => 'Payment search result',
+            'data'          => $date_wise_search
         ]);
 
     }
